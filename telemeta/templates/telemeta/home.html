@@ -2,9 +2,13 @@
 {% load telemeta_tags %}
 {% load i18n %}
 
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+
 {% block content %}
 <div class="home-content">
-<div id="module-set">
+	<div id="module-set" style="{% if LANGUAGE_BIDI %}float:left;{% else %}float:right;{% endif %}">
 
 {% block modules %}
 
@@ -14,6 +18,7 @@
  </center>
 </div>
 
+{% comment %}
 <div class="module">
     <h3><img src="{{ STATIC_URL }}telemeta/images/module_world.png" alt="world" style="vertical-align:middle" />
     {% trans "Geo Navigator" %}</h3>
@@ -22,6 +27,7 @@
     <img class="map-thumbnail" src="{{ STATIC_URL }}telemeta/images/world2.png" alt="{% trans "Open the geographic navigator" %}"/></a>
     </div>
 </div>
+{% endcomment %}
 
 <!--
 {% with "Last changes" as title %}
@@ -34,21 +40,16 @@
     <h3><img src="{{ STATIC_URL }}telemeta/images/module_playlist.png" style="vertical-align:middle" />
     {% trans "Partners" %}</h3><br />
     <div style="background-color: white; padding: 1ex;" align="center">
-    <a href="http://www.cnrs.fr" target="_blank"><img class="logo" src="{{ STATIC_URL }}telemeta/images/logo-CNRS.png" alt="CNRS"></a>&nbsp;&nbsp;&nbsp;
-    <a href="http://www.culturecommunication.gouv.fr" target="_blank"><img class="logo" src="{{ STATIC_URL }}telemeta/images/logo_mcc_2.png" alt="MCC"></a>&nbsp;&nbsp;
-    <a href="http://www.mnhn.fr" target="_blank"><img class="logo" src="{{ STATIC_URL }}telemeta/images/logo-MNHN.png" alt="MNHN"></a>
     <a href="https://www.u-paris10.fr" target="_blank"><img class="logo" src="{{ STATIC_URL }}telemeta/images/logo-UPN.png" width=160px alt="Université Paris Nanterre"></a>
     <br /><br />
     <a href="http://www.parisson.com" target="_blank"><img class="logo" src="{{ STATIC_URL }}telemeta/images/parisson_logo_125_72.png" alt="Parisson"></a>
-    <a href="http://www.huma-num.fr" target="_blank"><img class="logo" src="{{ STATIC_URL }}telemeta/images/logohumanum.png" alt="Huma-Num"></a>
-    <a href="http://www.europeanasounds.eu/" target="_blank"><img class="logo" src="{{ STATIC_URL }}telemeta/images/Europeana_sounds_landscape_2.jpg" alt="Europeana sounds"></a>
     </div>
 </div>
 
 {% endblock %}
 
 </div>
-<div class="home-description">
+<div class="home-description" style="{% if LANGUAGE_BIDI %}padding-left:33%; padding-right:1%;{% else %}padding-right:33%; padding-left:1%;{% endif %}">
 <img class="align-left" src="{{ STATIC_URL }}telemeta/images/vox.png" alt="vox" style="vertical-align:middle;" />
 
 {{ page_content|render_flatpage }}
